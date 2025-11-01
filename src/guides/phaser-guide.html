@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa - Phaser</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .command-card {
+            border-left: 4px solid #ff6b35;
+            margin-bottom: 1rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón de regreso -->
+    <a href="../pages/guide.html" class="btn btn-primary back-btn">
+        <i class="fas fa-arrow-left me-2"></i>Volver
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">
+                        <i class="fas fa-gamepad me-3"></i>Phaser
+                    </h1>
+                    <p class="lead">Framework de juegos 2D rápido y divertido para HTML5</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <span class="badge bg-light text-dark fs-6">JavaScript</span>
+                        <span class="badge bg-warning text-dark fs-6">Intermedio</span>
+                        <span class="badge bg-success fs-6">2D</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <!-- Configuración Inicial -->
+        <section class="mb-5">
+            <h2><i class="fas fa-cog me-2"></i>Configuración Inicial</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Configuración Básica</h5>
+                            <div class="code-block">
+                                <code>
+// Configuración del juego<br>
+const config = {<br>
+&nbsp;&nbsp;type: Phaser.AUTO,<br>
+&nbsp;&nbsp;width: 800,<br>
+&nbsp;&nbsp;height: 600,<br>
+&nbsp;&nbsp;scene: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;preload: preload,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;create: create,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;update: update<br>
+&nbsp;&nbsp;}<br>
+};<br><br>
+const game = new Phaser.Game(config);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Funciones Básicas</h5>
+                            <div class="code-block">
+                                <code>
+function preload() {<br>
+&nbsp;&nbsp;// Cargar recursos<br>
+&nbsp;&nbsp;this.load.image('sky', 'assets/sky.png');<br>
+}<br><br>
+function create() {<br>
+&nbsp;&nbsp;// Crear objetos del juego<br>
+&nbsp;&nbsp;this.add.image(400, 300, 'sky');<br>
+}<br><br>
+function update() {<br>
+&nbsp;&nbsp;// Lógica del juego<br>
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comandos Principales -->
+        <section class="mb-5">
+            <h2><i class="fas fa-code me-2"></i>Comandos Principales</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-image text-success me-2"></i>Sprites</h6>
+                            <div class="code-block">
+                                <code>
+// Crear sprites<br>
+const player = this.add.sprite(100, 450, 'dude');<br><br>
+// Sprite con física<br>
+const player = this.physics.add.sprite(100, 450, 'dude');<br>
+player.setBounce(0.2);<br>
+player.setCollideWorldBounds(true);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-play text-primary me-2"></i>Animaciones</h6>
+                            <div class="code-block">
+                                <code>
+// Crear animación<br>
+this.anims.create({<br>
+&nbsp;&nbsp;key: 'left',<br>
+&nbsp;&nbsp;frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),<br>
+&nbsp;&nbsp;frameRate: 10,<br>
+&nbsp;&nbsp;repeat: -1<br>
+});<br><br>
+// Reproducir animación<br>
+player.anims.play('left');
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-keyboard text-warning me-2"></i>Controles</h6>
+                            <div class="code-block">
+                                <code>
+// Crear controles<br>
+cursors = this.input.keyboard.createCursorKeys();<br><br>
+// En update()<br>
+if (cursors.left.isDown) {<br>
+&nbsp;&nbsp;player.setVelocityX(-160);<br>
+} else if (cursors.right.isDown) {<br>
+&nbsp;&nbsp;player.setVelocityX(160);<br>
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Física y Colisiones -->
+        <section class="mb-5">
+            <h2><i class="fas fa-atom me-2"></i>Física y Colisiones</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Sistema de Física</h5>
+                            <div class="code-block">
+                                <code>
+// Configurar física en config<br>
+physics: {<br>
+&nbsp;&nbsp;default: 'arcade',<br>
+&nbsp;&nbsp;arcade: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gravity: { y: 300 },<br>
+&nbsp;&nbsp;&nbsp;&nbsp;debug: false<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+// Crear grupo con física<br>
+platforms = this.physics.add.staticGroup();
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Colisiones</h5>
+                            <div class="code-block">
+                                <code>
+// Detectar colisiones<br>
+this.physics.add.collider(player, platforms);<br><br>
+// Overlap con callback<br>
+this.physics.add.overlap(player, stars, collectStar, null, this);<br><br>
+function collectStar(player, star) {<br>
+&nbsp;&nbsp;star.disableBody(true, true);<br>
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características Avanzadas -->
+        <section class="mb-5">
+            <h2><i class="fas fa-rocket me-2"></i>Características Avanzadas</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Escenas</h5>
+                            <div class="code-block">
+                                <code>
+// Crear clase de escena<br>
+class GameScene extends Phaser.Scene {<br>
+&nbsp;&nbsp;constructor() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super({ key: 'GameScene' });<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+// Cambiar escena<br>
+this.scene.start('GameScene');
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Audio</h5>
+                            <div class="code-block">
+                                <code>
+// Cargar audio<br>
+this.load.audio('jump', 'assets/jump.wav');<br><br>
+// Reproducir sonido<br>
+const jumpSound = this.sound.add('jump');<br>
+jumpSound.play();<br><br>
+// Música de fondo<br>
+const music = this.sound.add('bgMusic', { loop: true });<br>
+music.play();
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section class="mb-5">
+            <h2><i class="fas fa-star me-2"></i>Características Principales</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-gamepad fa-3x text-primary mb-3"></i>
+                            <h6>Juegos 2D</h6>
+                            <p class="small text-muted">Especializado en juegos 2D</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-atom fa-3x text-success mb-3"></i>
+                            <h6>Física Integrada</h6>
+                            <p class="small text-muted">Sistema de física Arcade y Matter.js</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-volume-up fa-3x text-warning mb-3"></i>
+                            <h6>Audio</h6>
+                            <p class="small text-muted">Sistema de audio completo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-mobile-alt fa-3x text-info mb-3"></i>
+                            <h6>Móvil</h6>
+                            <p class="small text-muted">Optimizado para dispositivos móviles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section class="mb-5">
+            <h2><i class="fas fa-book me-2"></i>Recursos Adicionales</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://phaser.io/learn', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-external-link-alt fa-2x text-primary mb-3"></i>
+                            <h6>Documentación Oficial</h6>
+                            <p class="text-muted small">Aprende con la documentación</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://phaser.io/examples', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-code fa-2x text-dark mb-3"></i>
+                            <h6>Ejemplos</h6>
+                            <p class="text-muted small">Explora ejemplos de código</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://github.com/photonstorm/phaser', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fab fa-github fa-2x text-info mb-3"></i>
+                            <h6>Repositorio GitHub</h6>
+                            <p class="text-muted small">Accede al código fuente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

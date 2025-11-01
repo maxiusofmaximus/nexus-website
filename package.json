@@ -1,5 +1,5 @@
 {
-  "name": "nexus-website",
+  "name": "nexusengine-website",
   "version": "1.0.0",
   "description": "Sitio web oficial de NexusEngine - Motor de juegos universal",
   "main": "public/index.html",

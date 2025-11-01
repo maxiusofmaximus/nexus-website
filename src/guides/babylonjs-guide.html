@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa - Babylon.js</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .command-card {
+            border-left: 4px solid #3498db;
+            margin-bottom: 1rem;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón de regreso -->
+    <a href="../pages/guide.html" class="btn btn-primary back-btn">
+        <i class="fas fa-arrow-left me-2"></i>Volver
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">
+                        <i class="fas fa-cube me-3"></i>Babylon.js
+                    </h1>
+                    <p class="lead">Motor 3D avanzado y profesional para web</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <span class="badge bg-light text-dark fs-6">JavaScript</span>
+                        <span class="badge bg-success fs-6">Avanzado</span>
+                        <span class="badge bg-info fs-6">3D</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <!-- Configuración Inicial -->
+        <section class="mb-5">
+            <h2><i class="fas fa-cog me-2"></i>Configuración Inicial</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Configuración Básica</h5>
+                            <div class="code-block">
+                                <code>
+// Crear motor y escena<br>
+const canvas = document.getElementById("renderCanvas");<br>
+const engine = new BABYLON.Engine(canvas, true);<br>
+const scene = new BABYLON.Scene(engine);<br><br>
+// Crear cámara<br>
+const camera = new BABYLON.ArcRotateCamera("camera", 0, 0, 10, BABYLON.Vector3.Zero(), scene);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Loop de Renderizado</h5>
+                            <div class="code-block">
+                                <code>
+// Iniciar loop de renderizado<br>
+engine.runRenderLoop(() => {<br>
+&nbsp;&nbsp;scene.render();<br>
+});<br><br>
+// Redimensionar automáticamente<br>
+window.addEventListener("resize", () => {<br>
+&nbsp;&nbsp;engine.resize();<br>
+});
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comandos Principales -->
+        <section class="mb-5">
+            <h2><i class="fas fa-code me-2"></i>Comandos Principales</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-cube text-success me-2"></i>Crear Meshes</h6>
+                            <div class="code-block">
+                                <code>
+// Crear primitivas<br>
+const box = BABYLON.MeshBuilder.CreateBox("box", {size: 2}, scene);<br>
+const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2}, scene);<br>
+const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 6, height: 6}, scene);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-palette text-primary me-2"></i>Materiales</h6>
+                            <div class="code-block">
+                                <code>
+// Crear material<br>
+const material = new BABYLON.StandardMaterial("material", scene);<br>
+material.diffuseColor = new BABYLON.Color3(1, 0, 1);<br>
+material.specularColor = new BABYLON.Color3(0, 1, 0);<br>
+box.material = material;
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card command-card h-100">
+                        <div class="card-body">
+                            <h6><i class="fas fa-lightbulb text-warning me-2"></i>Iluminación</h6>
+                            <div class="code-block">
+                                <code>
+// Crear luces<br>
+const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);<br>
+light.intensity = 0.7;<br><br>
+const dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(0, -1, 0), scene);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características Avanzadas -->
+        <section class="mb-5">
+            <h2><i class="fas fa-rocket me-2"></i>Características Avanzadas</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Física</h5>
+                            <div class="code-block">
+                                <code>
+// Habilitar física<br>
+scene.enablePhysics(new BABYLON.Vector3(0, -9.81, 0), new BABYLON.CannonJSPlugin());<br><br>
+// Agregar física a un mesh<br>
+box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, restitution: 0.7 }, scene);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card command-card">
+                        <div class="card-body">
+                            <h5>Animaciones</h5>
+                            <div class="code-block">
+                                <code>
+// Crear animación<br>
+const animationBox = new BABYLON.Animation("boxAnimation", "position.x", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);<br><br>
+// Definir keyframes<br>
+const keys = [];<br>
+keys.push({frame: 0, value: 0});<br>
+keys.push({frame: 30, value: 5});<br>
+animationBox.setKeys(keys);
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section class="mb-5">
+            <h2><i class="fas fa-star me-2"></i>Características Principales</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                            <h6>Motor Completo</h6>
+                            <p class="small text-muted">Física, audio, animaciones integradas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-tools fa-3x text-success mb-3"></i>
+                            <h6>Herramientas</h6>
+                            <p class="small text-muted">Inspector, playground, editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-file-import fa-3x text-warning mb-3"></i>
+                            <h6>Importación</h6>
+                            <p class="small text-muted">Soporte para múltiples formatos 3D</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-vr-cardboard fa-3x text-info mb-3"></i>
+                            <h6>XR</h6>
+                            <p class="small text-muted">Realidad virtual y aumentada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section class="mb-5">
+            <h2><i class="fas fa-book me-2"></i>Recursos Adicionales</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://doc.babylonjs.com/', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-external-link-alt fa-2x text-primary mb-3"></i>
+                            <h6>Documentación Oficial</h6>
+                            <p class="text-muted small">Visita la documentación completa</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://playground.babylonjs.com/', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fas fa-play fa-2x text-dark mb-3"></i>
+                            <h6>Playground</h6>
+                            <p class="text-muted small">Prueba código online</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 resource-card" onclick="window.open('https://github.com/BabylonJS/Babylon.js', '_blank')" style="cursor: pointer; transition: transform 0.2s;">
+                        <div class="card-body text-center">
+                            <i class="fab fa-github fa-2x text-info mb-3"></i>
+                            <h6>Repositorio GitHub</h6>
+                            <p class="text-muted small">Accede al código fuente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

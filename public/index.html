@@ -3,1073 +3,985 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 NexusEngine - Motor de Juegos Universal</title>
-    <meta name="description" content="NexusEngine: Motor de juegos universal con IA integrada, soporte para múltiples engines y controles manuales">
+    <title>Nexus - Plataforma de Desarrollo de Juegos</title>
+    <meta name="description" content="Nexus - Plataforma revolucionaria que combina múltiples motores gráficos con IA para desarrollo de juegos accesible y potente.">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Estilos personalizados -->
-    <link href="./src/styles/main.css" rel="stylesheet">
+    <link href="../src/styles/main.css" rel="stylesheet">
     
     <style>
-        :root {
-            --primary-color: #4299e1;
-            --secondary-color: #63b3ed;
-            --accent-color: #48bb78;
-            --danger-color: #f56565;
-            --warning-color: #ed8936;
-            
-            --transition: all 0.3s ease;
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
         }
 
-        /* Tema oscuro (por defecto) */
-        body.dark-mode {
-            --bg-primary: #1a202c;
-            --bg-secondary: #2d3748;
-            --bg-tertiary: #4a5568;
-            
-            --text-primary: #ffffff;
-            --text-secondary: #e2e8f0;
-            --text-muted: #a0aec0;
-            
-            --border-color: #4a5568;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Tema claro */
-        body.light-mode {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f7fafc;
-            --bg-tertiary: #edf2f7;
-            
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            
-            --border-color: #e2e8f0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Estilos del toggle de tema */
-        .theme-toggle {
-            border-radius: 50% !important;
-            width: 40px !important;
-            height: 40px !important;
-            padding: 0 !important;
+        /* Menú hamburguesa moderno */
+        .modern-hamburger {
+            border: 2px solid #667eea !important;
+            padding: 0.75rem !important;
+            background: rgba(102, 126, 234, 0.1) !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            width: 50px !important;
+            height: 50px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            transition: var(--transition) !important;
-            margin-left: 0.5rem !important;
         }
 
-        .theme-toggle:hover {
-            transform: scale(1.1) !important;
-            box-shadow: var(--shadow-lg) !important;
+        .modern-hamburger:hover {
+            background: rgba(102, 126, 234, 0.2) !important;
+            border-color: #764ba2 !important;
+            transform: scale(1.05) !important;
         }
 
-        .theme-toggle i {
-            font-size: 1rem !important;
-            transition: var(--transition) !important;
+        .modern-hamburger:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            position: relative;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
         }
 
-        /* Header */
-        .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
+        .modern-hamburger:hover .hamburger-line {
+            background: #764ba2;
+            box-shadow: 0 0 8px rgba(118, 75, 162, 0.4);
+        }
+
+        /* Animación optimizada del menú hamburguesa */
+        .modern-hamburger.collapsed .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: #764ba2;
+        }
+
+        .modern-hamburger.collapsed .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .modern-hamburger.collapsed .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: #764ba2;
+        }
+
+        /* Efecto de pulso al hacer clic */
+        .modern-hamburger:active {
+            transform: scale(0.95);
+        }
+
+        /* Animación de entrada suave para el botón */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modern-hamburger {
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        /* Mejora del feedback visual */
+        .modern-hamburger::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(118, 75, 162, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .modern-hamburger:hover::before {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Estilos de accesibilidad */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Mejoras de foco para accesibilidad */
+        .modern-hamburger:focus-visible {
+            outline: 2px solid #764ba2;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.3);
+        }
+
+        /* Soporte para navegación por teclado */
+        .modern-hamburger:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Indicadores de estado para lectores de pantalla */
+        .modern-hamburger[aria-expanded="true"]::after {
+            content: "Menu abierto";
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .modern-hamburger[aria-expanded="false"]::after {
+            content: "Menu cerrado";
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* Media queries para responsividad */
+        @media (max-width: 768px) {
+            .modern-hamburger {
+                width: 35px;
+                height: 35px;
+                padding: 6px;
+            }
+
+            .hamburger-icon {
+                width: 20px;
+                height: 15px;
+            }
+
+            .hamburger-line {
+                height: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modern-hamburger {
+                width: 32px;
+                height: 32px;
+                padding: 5px;
+            }
+
+            .hamburger-icon {
+                width: 18px;
+                height: 14px;
+            }
+
+            .hamburger-line {
+                height: 2px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 991px) {
+            .modern-hamburger {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hamburger-icon {
+                width: 22px;
+                height: 16px;
+            }
+        }
+
+        /* Mejoras para dispositivos táctiles */
+        @media (hover: none) and (pointer: coarse) {
+            .modern-hamburger {
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .modern-hamburger:hover::before {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+
+
+        /* Estilos para el botón sidebar */
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Ajustar el container de la navbar para el nuevo layout */
+        .navbar .container {
+            position: relative;
+        }
+
+        /* Dar espacio al logo para el botón hamburguesa */
+        .navbar-brand {
+            margin-left: 50px;
+        }
+
+        .sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-toggle:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Estilos para la barra lateral */
+        .sidebar {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 100%);
+            backdrop-filter: blur(20px);
+            z-index: 1050;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
         }
 
-        .nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
+        .sidebar-header h5 {
+            color: white;
+            margin: 0;
+            font-weight: 600;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-            background: rgba(66, 153, 225, 0.1);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        /* Hamburger Menu */
-        .hamburger-menu {
-            display: block;
+        .sidebar-close {
             background: none;
             border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin: 0;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        /* Overlay para cerrar sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
         }
 
-        .hamburger-menu:hover {
-            background: var(--bg-tertiary);
-            color: var(--primary-color);
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Main Content */
-        .main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 2rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        .content {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #3182ce;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--border-color);
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #38a169;
-            transform: translateY(-2px);
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        /* Features Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        /* Game Container */
-        .game-container {
-            background: var(--bg-primary);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 2rem 0;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .game-placeholder {
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .game-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Engine Status */
-        .engine-status {
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .status-item:last-child {
-            border-bottom: none;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-        }
-
-        .status-online {
-            background: var(--accent-color);
-            animation: pulse 2s infinite;
-        }
-
-        .status-offline {
-            background: var(--danger-color);
-        }
-
-        /* Guide Panel */
-        .guide-panel {
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .guide-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .guide-tab {
-            padding: 0.5rem 1rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .guide-tab.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-
-        .guide-content {
-            display: none;
-        }
-
-        .guide-content.active {
-            display: block;
-        }
-
-        .guide-content h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .guide-content ul {
-            list-style: none;
-            padding-left: 1rem;
-        }
-
-        .guide-content li {
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-            position: relative;
-        }
-
-        .guide-content li:before {
-            content: "→";
-            color: var(--primary-color);
-            position: absolute;
-            left: -1rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-
-            .nav {
-                padding: 0 1rem;
-                flex-direction: row;
-                gap: 1rem;
-            }
-
-            .nav-links {
+        /* Ocultar sidebar toggle en escritorio */
+        @media (min-width: 992px) {
+            .sidebar-toggle {
                 display: none;
             }
-
-            .nav-actions {
-                gap: 0.5rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
         }
 
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease;
-        }
-
-        /* Loading States */
-        .loading {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid transparent;
-            border-top: 2px solid currentColor;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            z-index: 10000;
-            animation: slideInRight 0.3s ease;
-            max-width: 400px;
-        }
-
-        .notification.success {
-            background: var(--accent-color);
-        }
-
-        .notification.error {
-            background: var(--danger-color);
-        }
-
-        .notification.warning {
-            background: var(--warning-color);
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
+        /* Reducir animaciones para usuarios que prefieren menos movimiento */
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar,
+            .sidebar-overlay,
+            .sidebar-toggle {
+                animation: none !important;
+                transition: none !important;
             }
         }
     </style>
 </head>
-<body class="dark-mode">
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <button class="hamburger-menu" id="hamburger-menu" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Abrir menú lateral">
+                <svg width="24" height="24" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M50.008,56.043l-35.989,0c-3.309,0 -5.995,-2.686 -5.995,-5.995l0,-36.011c0,-3.308 2.686,-5.994 5.995,-5.995l35.989,0c3.309,0.001 5.995,2.687 5.995,5.995l0,36.011c0,3.309 -2.686,5.995 -5.995,5.995Zm-25.984,-4.001l0,-39.999l-9.012,0c-1.65,0 -2.989,1.339 -2.989,2.989l0,34.021c0,1.65 1.339,2.989 2.989,2.989l9.012,0Zm24.991,-39.999l-20.991,0l0,39.999l20.991,0c1.65,0 2.989,-1.339 2.989,-2.989l0,-34.021c0,-1.65 -1.339,-2.989 -2.989,-2.989Z"/>
+                    <rect x="14.611" y="16.042" width="6.569" height="2"/>
+                    <rect x="14.611" y="24.042" width="6.569" height="2"/>
+                    <rect x="14.611" y="20.042" width="6.569" height="2"/>
+                </svg>
             </button>
             
-            <a href="#" class="logo">
-                <i class="fas fa-gamepad"></i>
-                NexusEngine
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="fas fa-rocket me-2"></i>
+                Nexus
             </a>
             
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#motores">Motores</a></li>
-                <li><a href="../src/pages/guide.html">Guías</a></li>
-                <li><a href="#documentacion">Docs</a></li>
-            </ul>
-            
-            <div class="nav-actions">
-                <button class="btn btn-secondary" id="toggle-guide">
-                    <i class="fas fa-book"></i>
-                    Guías
-                </button>
-                <button class="btn btn-primary" id="select-engine">
-                    <i class="fas fa-cog"></i>
-                    Seleccionar Motor
-                </button>
-                <button class="btn btn-secondary theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
-                    <i class="fas fa-moon" id="theme-icon"></i>
-                </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../src/pages/guide.html">Guías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main">
-        <!-- Content Area -->
-        <div class="content fade-in">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h1>🎮 Motor de Juegos Universal</h1>
-                <p>
-                    Crea juegos increíbles con IA integrada, múltiples motores gráficos 
-                    y controles tanto manuales como automatizados. Todo en una plataforma.
-                </p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary" id="start-creating">
-                        <i class="fas fa-play"></i>
-                        Comenzar a Crear
-                    </button>
-                    <button class="btn btn-secondary" id="view-examples">
-                        <i class="fas fa-eye"></i>
-                        Ver Ejemplos
-                    </button>
-                    <a href="./guide.html" class="btn btn-success" target="_blank">
-                        <i class="fas fa-book-open"></i>
-                        Guía Completa
-                    </a>
-                </div>
-            </section>
-
-            <!-- Features -->
-            <section class="features">
-                <div class="card">
-                    <h3><i class="fas fa-engine"></i> Múltiples Motores</h3>
-                    <p>Soporte para Kaplay, motor propio offline, Phaser y PixiJS. Cambia entre motores sin perder tu progreso.</p>
-                    <button class="btn btn-secondary" onclick="showEngineSelector()">
-                        <i class="fas fa-list"></i>
-                        Ver Motores
-                    </button>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-robot"></i> IA Integrada</h3>
-                    <p>Asistente IA con modos Ask y Agent. Pregunta, aprende y automatiza tareas complejas.</p>
-                    <button class="btn btn-secondary" onclick="toggleAIChat()">
-                        <i class="fas fa-comments"></i>
-                        Abrir Chat IA
-                    </button>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-hand-pointer"></i> Control Manual</h3>
-                    <p>Interfaz visual con drag & drop, toolbar, shortcuts y editor de propiedades.</p>
-                    <button class="btn btn-secondary" onclick="showManualControls()">
-                        <i class="fas fa-mouse"></i>
-                        Ver Controles
-                    </button>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-keyboard"></i> Comandos Humanizados</h3>
-                    <p>Usa palabras clave en español como "crear jugador en 100,200" sin escribir código.</p>
-                    <button class="btn btn-secondary" onclick="showKeywords()">
-                        <i class="fas fa-terminal"></i>
-                        Ver Comandos
-                    </button>
-                </div>
-            </section>
-
-            <!-- Game Container -->
-            <section class="game-container" id="game-container">
-                <div class="game-placeholder">
-                    <i class="fas fa-gamepad"></i>
-                    <h3>Área de Juego</h3>
-                    <p>Selecciona un motor gráfico para comenzar</p>
-                    <button class="btn btn-primary" onclick="showEngineSelector()">
-                        <i class="fas fa-plus"></i>
-                        Seleccionar Motor
-                    </button>
-                </div>
-            </section>
-
-            <!-- Quick Actions -->
-            <section class="features">
-                <div class="card">
-                    <h3><i class="fas fa-rocket"></i> Inicio Rápido</h3>
-                    <p>Plantillas predefinidas para comenzar inmediatamente.</p>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="btn btn-secondary" onclick="createTemplate('platformer')">
-                            <i class="fas fa-running"></i>
-                            Plataformas
-                        </button>
-                        <button class="btn btn-secondary" onclick="createTemplate('shooter')">
-                            <i class="fas fa-crosshairs"></i>
-                            Shooter
-                        </button>
-                        <button class="btn btn-secondary" onclick="createTemplate('puzzle')">
-                            <i class="fas fa-puzzle-piece"></i>
-                            Puzzle
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-download"></i> Exportar</h3>
-                    <p>Exporta tu juego a diferentes formatos.</p>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="btn btn-secondary" onclick="exportGame('html5')">
-                            <i class="fab fa-html5"></i>
-                            HTML5
-                        </button>
-                        <button class="btn btn-secondary" onclick="exportGame('desktop')">
-                            <i class="fas fa-desktop"></i>
-                            Desktop
-                        </button>
-                        <button class="btn btn-secondary" onclick="exportGame('mobile')">
-                            <i class="fas fa-mobile-alt"></i>
-                            Mobile
-                        </button>
-                    </div>
-                </div>
-            </section>
         </div>
+    </nav>
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- Engine Status -->
-            <div class="engine-status">
-                <h3><i class="fas fa-info-circle"></i> Estado del Sistema</h3>
-                <div class="status-item">
-                    <span>Conectividad</span>
-                    <span>
-                        <span class="status-indicator status-online" id="network-status"></span>
-                        <span id="network-text">Online</span>
-                    </span>
-                </div>
-                <div class="status-item">
-                    <span>Motor Actual</span>
-                    <span id="current-engine">Ninguno</span>
-                </div>
-                <div class="status-item">
-                    <span>IA Disponible</span>
-                    <span id="ai-status">
-                        <span class="status-indicator status-online"></span>
-                        Activa
-                    </span>
-                </div>
-                <div class="status-item">
-                    <span>Objetos</span>
-                    <span id="object-count">0</span>
-                </div>
-            </div>
+    <!-- Barra lateral -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h5>Menú</h5>
+            <button class="sidebar-close" onclick="toggleSidebar()" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="sidebar-menu">
+                <li><a href="#home" onclick="toggleSidebar()">Inicio</a></li>
+                <li><a href="#features" onclick="toggleSidebar()">Características</a></li>
+                <li><a href="../src/pages/guide.html">Guías</a></li>
+                <li><a href="#contact" onclick="toggleSidebar()">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
 
-            <!-- Guide Panel -->
-            <div class="guide-panel" id="guide-panel">
-                <h3><i class="fas fa-book"></i> Guías Rápidas</h3>
-                
-                <div class="guide-tabs">
-                    <button class="guide-tab active" data-tab="basics">Básico</button>
-                    <button class="guide-tab" data-tab="commands">Comandos</button>
-                    <button class="guide-tab" data-tab="ai">IA</button>
-                </div>
+    <!-- Overlay para cerrar sidebar -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-                <div class="guide-content active" id="basics">
-                    <h4>🚀 Primeros Pasos</h4>
-                    <ul>
-                        <li>Selecciona un motor gráfico</li>
-                        <li>Usa drag & drop para crear objetos</li>
-                        <li>Configura propiedades en el inspector</li>
-                        <li>Prueba tu juego con F5</li>
-                    </ul>
-                    
-                    <h4>🎮 Controles Básicos</h4>
-                    <ul>
-                        <li>Click: Seleccionar objeto</li>
-                        <li>Drag: Mover objeto</li>
-                        <li>Ctrl+Z: Deshacer</li>
-                        <li>F5: Ejecutar juego</li>
-                    </ul>
-                </div>
-
-                <div class="guide-content" id="commands">
-                    <h4>💬 Comandos Rápidos</h4>
-                    <ul>
-                        <li>crear jugador en 100,200</li>
-                        <li>mover jugador a 300,400</li>
-                        <li>color jugador rojo</li>
-                        <li>sonido explosion</li>
-                        <li>ir a menu_principal</li>
-                    </ul>
-                    
-                    <h4>🎯 Ejemplos Útiles</h4>
-                    <ul>
-                        <li>gravedad jugador</li>
-                        <li>tecla espacio hacer saltar</li>
-                        <li>cuando toca moneda eliminar</li>
-                        <li>zoom 2</li>
-                    </ul>
-                </div>
-
-                <div class="guide-content" id="ai">
-                    <h4>🤖 Modo Ask</h4>
-                    <ul>
-                        <li>"¿Cómo creo un jugador?"</li>
-                        <li>"¿Qué comandos de física hay?"</li>
-                        <li>"Explica las escenas"</li>
-                    </ul>
-                    
-                    <h4>🎯 Modo Agent</h4>
-                    <ul>
-                        <li>"Crea un juego de plataformas"</li>
-                        <li>"Añade física al jugador"</li>
-                        <li>"Haz que siga la cámara"</li>
-                    </ul>
+    <!-- Sección Hero -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 mb-4">
+                        <i class="fas fa-rocket me-3"></i>
+                        Nexus
+                    </h1>
+                    <p class="lead mb-5">
+                        Plataforma de desarrollo de juegos con múltiples motores integrados, IA avanzada, comandos humanizados en español y controles manuales para crear experiencias interactivas de forma sencilla y potente
+                    </p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button class="btn btn-primary btn-lg" onclick="showEngineSelector()">
+                            <i class="fas fa-play me-2"></i>Comenzar Ahora
+                        </button>
+                        <a href="../src/pages/guide.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-book me-2"></i>Ver Guías
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Quick Tools -->
-            <div class="card">
-                <h3><i class="fas fa-tools"></i> Herramientas</h3>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <button class="btn btn-secondary" onclick="openConsole()">
-                        <i class="fas fa-terminal"></i>
-                        Consola
-                    </button>
-                    <button class="btn btn-secondary" onclick="openDebugger()">
-                        <i class="fas fa-bug"></i>
-                        Debug
-                    </button>
-                    <button class="btn btn-secondary" onclick="openAssets()">
-                        <i class="fas fa-images"></i>
-                        Assets
-                    </button>
+    <!-- Características -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 mb-4">Características Principales</h2>
+                    <p class="lead text-muted">
+                        Nexus combina la potencia de múltiples motores gráficos con inteligencia artificial
+                    </p>
                 </div>
             </div>
-        </aside>
-    </main>
-
-    <!-- Scripts -->
-    <script type="module">
-        // Import modules
-        import EngineSelector from './src/engines/EngineSelector.js';
-        import EngineSelectorUI from './src/components/EngineSelector.js';
-        import AIChat from './src/components/AIChat.js';
-        import KeywordSystem from './src/systems/KeywordSystem.js';
-
-        // Global state
-        let engineSelector = null;
-        let engineSelectorUI = null;
-        let aiChat = null;
-        let keywordSystem = null;
-        let currentEngine = null;
-
-        // Initialize application
-        document.addEventListener('DOMContentLoaded', async () => {
-            await initializeApp();
-            setupEventListeners();
-            updateNetworkStatus();
-        });
-
-        async function initializeApp() {
-            try {
-                // Initialize engine selector
-                engineSelector = new EngineSelector();
-                engineSelectorUI = new EngineSelectorUI(engineSelector);
-                
-                // Initialize AI Chat
-                aiChat = new AIChat();
-                
-                // Initialize keyword system
-                keywordSystem = new KeywordSystem(engineSelector);
-                
-                // Connect systems
-                window.engineSelector = engineSelector;
-                window.aiChat = aiChat;
-                window.keywordSystem = keywordSystem;
-                
-                console.log('✅ Aplicación inicializada');
-                showNotification('🎮 NexusEngine cargado exitosamente', 'success');
-                
-            } catch (error) {
-                console.error('Error inicializando aplicación:', error);
-                showNotification('❌ Error al cargar la aplicación', 'error');
-            }
-        }
-
-        function setupEventListeners() {
-            // Engine selector
-            document.getElementById('select-engine').addEventListener('click', showEngineSelector);
-            document.getElementById('start-creating').addEventListener('click', startCreating);
             
-            // Guide button
-            document.getElementById('toggle-guide').addEventListener('click', () => {
-                window.open('./guide.html', '_blank');
-            });
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-cogs fa-3x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Multi-Motor</h5>
+                            <p class="card-text">
+                                Soporte para múltiples motores gráficos: Three.js, Babylon.js, Kaplay y más
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-brain fa-3x text-success"></i>
+                            </div>
+                            <h5 class="card-title">IA Integrada</h5>
+                            <p class="card-text">
+                                Asistente de IA para ayudarte en el desarrollo y optimización de juegos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-language fa-3x text-info"></i>
+                            </div>
+                            <h5 class="card-title">Comandos Humanizados</h5>
+                            <p class="card-text">
+                                Sistema de palabras clave en español para programar de forma natural
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-mouse-pointer fa-3x text-warning"></i>
+                            </div>
+                            <h5 class="card-title">Controles Manuales</h5>
+                            <p class="card-text">
+                                Editor visual con drag & drop, toolbar y controles directos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-wifi-slash fa-3x text-secondary"></i>
+                            </div>
+                            <h5 class="card-title">Funciona Offline</h5>
+                            <p class="card-text">
+                                NexusEngine, nuestro motor personalizado que no requiere conexión a internet
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-code fa-3x text-danger"></i>
+                            </div>
+                            <h5 class="card-title">Fácil de Usar</h5>
+                            <p class="card-text">
+                                Interfaz intuitiva y documentación completa para desarrolladores
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motores Soportados -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 mb-4">Motores Soportados</h2>
+                </div>
+            </div>
             
-            // Guide tabs
-            document.querySelectorAll('.guide-tab').forEach(tab => {
-                tab.addEventListener('click', (e) => switchGuideTab(e.target.dataset.tab));
-            });
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
+                            <h6>Three.js</h6>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-cube fa-3x text-info mb-3"></i>
+                            <h6>Babylon.js</h6>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-gamepad fa-3x text-success mb-3"></i>
+                            <h6>Kaplay</h6>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-plus fa-3x text-secondary mb-3"></i>
+                            <h6>Más motores</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Network status
-            window.addEventListener('online', updateNetworkStatus);
-            window.addEventListener('offline', updateNetworkStatus);
+    <!-- Modos de Interacción -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 mb-4">Modos de Interacción</h2>
+                    <p class="lead text-muted">
+                        Nexus ofrece múltiples formas de crear y desarrollar juegos
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-mouse-pointer fa-3x text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Modo Manual</h5>
+                            <p class="card-text">
+                                Controles directos con drag & drop, toolbar visual y panel de propiedades
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="fas fa-check text-success me-2"></i>Drag & Drop</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Toolbar visual</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Atajos de teclado</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Inspector de propiedades</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-language fa-3x text-success"></i>
+                            </div>
+                            <h5 class="card-title">Comandos de Texto</h5>
+                            <p class="card-text">
+                                Palabras clave humanizadas en español para programar de forma natural
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="fas fa-check text-success me-2"></i>Sintaxis simple</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Comandos en español</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Sin código complejo</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Fácil de aprender</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-robot fa-3x text-warning"></i>
+                            </div>
+                            <h5 class="card-title">Asistente IA</h5>
+                            <p class="card-text">
+                                Inteligencia artificial que te ayuda en el desarrollo y optimización
+                            </p>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="fas fa-check text-success me-2"></i>Modo Ask (preguntas)</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Modo Agent (acciones)</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Generación de código</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Optimización automática</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Engine events
-            window.addEventListener('engineChanged', handleEngineChange);
-            window.addEventListener('networkChanged', handleNetworkChange);
-        }
+    <!-- Contacto -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 mb-4">¿Listo para comenzar?</h2>
+                    <p class="lead mb-4">
+                        Únete a la comunidad de desarrolladores que están creando el futuro de los videojuegos
+                    </p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button class="btn btn-primary btn-lg" onclick="showEngineSelector()">
+                            <i class="fas fa-rocket me-2"></i>Empezar Proyecto
+                        </button>
+                        <a href="../src/pages/guide.html" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-book me-2"></i>Documentación
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Nexus</h5>
+                <p class="mb-0">Plataforma de desarrollo de juegos con IA integrada</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="mb-0">&copy; 2025 Nexus. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Selector de Motor -->
+    <div class="modal fade" id="engineModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-cogs me-2"></i>Seleccionar Motor Gráfico
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card engine-option" onclick="selectEngine('threejs')">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
+                                    <h6>Three.js</h6>
+                                    <p class="small text-muted">Motor 3D potente y versátil</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card engine-option" onclick="selectEngine('babylonjs')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-cube fa-3x text-info mb-3"></i>
+                                    <h6>Babylon.js</h6>
+                                    <p class="small text-muted">Motor 3D profesional</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card engine-option" onclick="selectEngine('kaplay')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-gamepad fa-3x text-success mb-3"></i>
+                                    <h6>Kaplay</h6>
+                                    <p class="small text-muted">Motor 2D fácil de usar</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card engine-option" onclick="selectEngine('custom')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-wrench fa-3x text-secondary mb-3"></i>
+                                    <h6>NexusEngine</h6>
+                                    <p class="small text-muted">Motor personalizado de Nexus</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Funciones básicas
         function showEngineSelector() {
-            if (engineSelectorUI) {
-                engineSelectorUI.show();
-            }
+            const modal = new bootstrap.Modal(document.getElementById('engineModal'));
+            modal.show();
         }
 
-        function startCreating() {
-            if (!currentEngine) {
-                showEngineSelector();
+        // Función para controlar la barra lateral
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Manejar el foco para accesibilidad
+            if (sidebar.classList.contains('active')) {
+                // Enfocar el primer elemento del menú cuando se abre
+                const firstMenuItem = sidebar.querySelector('.sidebar-menu a');
+                if (firstMenuItem) {
+                    firstMenuItem.focus();
+                }
+                // Prevenir scroll del body
+                document.body.style.overflow = 'hidden';
             } else {
-                showNotification('🚀 ¡Comenzando a crear!', 'success');
+                // Restaurar scroll del body
+                document.body.style.overflow = '';
+                // Enfocar el botón toggle cuando se cierra
+                const toggleBtn = document.querySelector('.sidebar-toggle');
+                if (toggleBtn) {
+                    toggleBtn.focus();
+                }
             }
         }
-
-        function switchGuideTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.guide-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-
-            // Update content
-            document.querySelectorAll('.guide-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
+        
+        function selectEngine(engine) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('engineModal'));
+            modal.hide();
+            
+            // Mostrar notificación
+            showNotification(`🎮 Motor ${engine} seleccionado`, 'success');
+            
+            // Aquí se podría redirigir a la página específica del motor
+            console.log('Motor seleccionado:', engine);
         }
-
-        function updateNetworkStatus() {
-            const isOnline = navigator.onLine;
-            const statusEl = document.getElementById('network-status');
-            const textEl = document.getElementById('network-text');
-            
-            if (isOnline) {
-                statusEl.className = 'status-indicator status-online';
-                textEl.textContent = 'Online';
-            } else {
-                statusEl.className = 'status-indicator status-offline';
-                textEl.textContent = 'Offline';
-            }
-        }
-
-        function handleEngineChange(event) {
-            const { engineId, engine } = event.detail;
-            currentEngine = engine;
-            
-            document.getElementById('current-engine').textContent = 
-                engine.config.name || engineId;
-            
-            showNotification(`✅ Motor ${engineId} cargado`, 'success');
-            
-            // Update game container
-            updateGameContainer();
-        }
-
-        function handleNetworkChange(event) {
-            const { status, isOnline } = event.detail;
-            updateNetworkStatus();
-            
-            if (isOnline) {
-                showNotification('🌐 Conexión restaurada', 'success');
-            } else {
-                showNotification('📴 Sin conexión - Usando modo offline', 'warning');
-            }
-        }
-
-        function updateGameContainer() {
-            const container = document.getElementById('game-container');
-            const placeholder = container.querySelector('.game-placeholder');
-            
-            if (currentEngine && placeholder) {
-                placeholder.innerHTML = `
-                    <i class="fas fa-gamepad"></i>
-                    <h3>Motor ${currentEngine.config.name} Activo</h3>
-                    <p>¡Listo para crear tu juego!</p>
-                    <button class="btn btn-success" onclick="createFirstObject()">
-                        <i class="fas fa-plus"></i>
-                        Crear Primer Objeto
-                    </button>
-                `;
-            }
-        }
-
-        function showNotification(message, type = 'success') {
+        
+        function showNotification(message, type = 'info') {
+            // Crear notificación simple
             const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
+            notification.className = `alert alert-${type === 'success' ? 'success' : 'info'} position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close ms-2" onclick="this.parentElement.remove()"></button>
+            `;
             
             document.body.appendChild(notification);
             
+            // Auto-remove después de 3 segundos
             setTimeout(() => {
-                notification.remove();
+                if (notification.parentElement) {
+                    notification.remove();
+                }
             }, 3000);
         }
-
-        // Template functions
-        window.createTemplate = function(type) {
-            showNotification(`🎮 Creando plantilla: ${type}`, 'success');
-        };
-
-        window.exportGame = function(format) {
-            showNotification(`📦 Exportando a ${format}`, 'success');
-        };
-
-        window.toggleAIChat = function() {
-            showNotification('🤖 Chat IA próximamente', 'warning');
-        };
-
-        window.showManualControls = function() {
-            showNotification('🖱️ Controles manuales próximamente', 'warning');
-        };
-
-        window.showKeywords = function() {
-            window.open('./Guide.md#palabras-clave-humanizadas', '_blank');
-        };
-
-        window.openConsole = function() {
-            showNotification('💻 Consola próximamente', 'warning');
-        };
-
-        window.openDebugger = function() {
-            showNotification('🐛 Debugger próximamente', 'warning');
-        };
-
-        window.openAssets = function() {
-            showNotification('🖼️ Gestor de assets próximamente', 'warning');
-        };
-
-        window.createFirstObject = function() {
-            if (currentEngine) {
-                showNotification('🎯 Creando primer objeto...', 'success');
-                // Aquí iría la lógica para crear el primer objeto
+        
+        // Smooth scrolling para enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Estilo para las opciones de motor
+        const style = document.createElement('style');
+        style.textContent = `
+            .engine-option {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
             }
-        };
-
-        // Sidebar toggle functionality
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('show');
-        }
-
-        // Theme toggle functionality
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
             
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                themeIcon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'light');
-                showNotification('🌞 Modo claro activado', 'success');
-            } else {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                themeIcon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'dark');
-                showNotification('🌙 Modo oscuro activado', 'success');
+            .engine-option:hover {
+                transform: translateY(-5px);
+                border-color: #007bff;
+                box-shadow: 0 8px 15px rgba(0,123,255,0.2);
             }
-        }
-
-        // Load saved theme
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (savedTheme === 'light') {
-                body.classList.add('light-mode');
-                body.classList.remove('dark-mode');
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                body.classList.add('dark-mode');
-                body.classList.remove('light-mode');
-                themeIcon.className = 'fas fa-moon';
+        `;
+        document.head.appendChild(style);
+        
+        // Soporte para tecla Escape para cerrar sidebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar && sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
             }
-        }
-
-        // Initialize theme on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadTheme();
         });
 
-        // Global functions
-        window.showEngineSelector = showEngineSelector;
-        window.showNotification = showNotification;
-        window.toggleTheme = toggleTheme;
+        // Mostrar mensaje de bienvenida
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                showNotification('🎮 ¡Bienvenido a Nexus!', 'success');
+            }, 1000);
+
+            // Event listeners para accesibilidad del menú hamburguesa
+            const toggleBtn = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('#navbarNav');
+
+            if (toggleBtn && navbarCollapse) {
+                // Actualizar aria-expanded cuando el menú se abre/cierra
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            const isExpanded = navbarCollapse.classList.contains('show');
+                            toggleBtn.setAttribute('aria-expanded', isExpanded.toString());
+                        }
+                    });
+                });
+
+                observer.observe(navbarCollapse, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+
+                // Soporte para tecla Escape para cerrar el menú
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                        toggleBtn.focus();
+                    }
+                });
+
+                // Soporte para Enter y Space en el botón hamburguesa
+                toggleBtn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleBtn.click();
+                    }
+                });
+
+                // Trap focus dentro del menú cuando está abierto
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab' && navbarCollapse.classList.contains('show')) {
+                        const focusableElements = navbarCollapse.querySelectorAll(
+                            'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                        );
+                        const firstElement = focusableElements[0];
+                        const lastElement = focusableElements[focusableElements.length - 1];
+
+                        if (e.shiftKey && document.activeElement === firstElement) {
+                            e.preventDefault();
+                            lastElement.focus();
+                        } else if (!e.shiftKey && document.activeElement === lastElement) {
+                            e.preventDefault();
+                            firstElement.focus();
+                        }
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Completa - NexusEngine</title>
+    <title>Guía Completa - Nexus</title>
+    
+    <!-- Google Fonts - Tipografía moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,110 +19,395 @@
     
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #06b6d4;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --dark-bg: #0f0f23;
-            --dark-surface: #1a1a2e;
-            --dark-card: #16213e;
-            --light-bg: #ffffff;
-            --light-surface: #f8fafc;
-            --light-card: #ffffff;
+            /* Paleta Moderna Zoer-Inspired 2025 */
+            --primary-color: #6366F1;        /* Indigo moderno - Color principal */
+            --secondary-color: #8B5CF6;      /* Violet vibrante - Acento secundario */
+            --accent-color: #06B6D4;         /* Cyan brillante - Elementos interactivos */
+            --success-color: #10B981;        /* Emerald - Éxito */
+            --warning-color: #F59E0B;        /* Amber - Advertencias */
+            --danger-color: #EF4444;         /* Red - Errores */
+            --neutral-color: #6B7280;        /* Gray - Elementos neutros */
+            --warm-accent: #F97316;          /* Orange - Acentos cálidos */
+            
+            /* Modo Claro - Diseño limpio y moderno */
+            --light-bg: #FAFBFC;
+            --light-surface: #F8FAFC;
+            --light-card: #FFFFFF;
+            --light-text-primary: #1F2937;
+            --light-text-secondary: #6B7280;
+            --light-border: #E5E7EB;
+            
+            /* Modo Oscuro - Elegante y profesional */
+            --dark-bg: #0F0F23;
+            --dark-surface: #1A1B3A;
+            --dark-card: #252659;
+            --dark-text-primary: #F9FAFB;
+            --dark-text-secondary: #D1D5DB;
+            --dark-border: #374151;
+            
+            /* Gradientes modernos estilo Zoer */
+            --gradient-primary: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%);
+            --gradient-warm: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
+            --gradient-success: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+            --gradient-hero: linear-gradient(135deg, #6366F1 0%, #8B5CF6 25%, #06B6D4 50%, #10B981 75%, #F97316 100%);
+            --gradient-card: linear-gradient(145deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            
+            /* Sombras modernas */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
 
         /* Tema claro */
         body.light-mode {
             background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-surface) 100%);
-            color: #1f2937;
+            color: var(--light-text-primary);
         }
 
         .light-mode .navbar {
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(254, 254, 254, 0.95) !important;
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--light-border);
         }
 
         .light-mode .card {
             background: var(--light-card);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--light-border);
+            box-shadow: 0 8px 25px rgba(43, 49, 166, 0.08);
         }
 
         .light-mode .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(248, 249, 250, 0.95);
+            border-right: 1px solid var(--light-border);
         }
 
         .light-mode .nav-link {
-            color: #4b5563 !important;
+            color: var(--light-text-secondary) !important;
+            transition: all 0.3s ease;
         }
 
         .light-mode .nav-link:hover {
             color: var(--primary-color) !important;
-            background: rgba(99, 102, 241, 0.1);
+            background: rgba(43, 49, 166, 0.08);
+            transform: translateX(4px);
         }
 
         .light-mode .nav-link.active {
             color: var(--primary-color) !important;
-            background: rgba(99, 102, 241, 0.15);
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
         }
 
         .light-mode pre {
-            background: #f8fafc !important;
-            border: 1px solid #e5e7eb;
+            background: var(--light-surface) !important;
+            border: 1px solid var(--light-border);
+            border-radius: 8px;
         }
 
         .light-mode code {
-            background: #f3f4f6;
-            color: #374151;
+            background: var(--light-surface);
+            color: var(--light-text-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .dark-mode pre {
+            background: var(--dark-surface) !important;
+            border: 1px solid var(--dark-border);
+            color: var(--dark-text-primary);
+            border-radius: 8px;
+        }
+
+        .dark-mode code {
+            background: var(--dark-card);
+            color: var(--dark-text-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         /* Tema oscuro */
         body.dark-mode {
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-surface) 50%, var(--dark-card) 100%);
-            color: #e5e7eb;
+            color: var(--dark-text-primary);
         }
 
         .dark-mode .navbar {
-            background: rgba(15, 15, 35, 0.95) !important;
+            background: rgba(16, 18, 27, 0.95) !important;
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--dark-border);
         }
 
         .dark-mode .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
 
         .dark-mode .sidebar {
-            background: rgba(15, 15, 35, 0.95);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(16, 18, 27, 0.95);
+            border-right: 1px solid var(--dark-border);
         }
 
         .dark-mode .nav-link {
-            color: #d1d5db !important;
+            color: var(--dark-text-secondary) !important;
+            transition: all 0.3s ease;
         }
 
         .dark-mode .nav-link:hover {
-            color: #ffffff !important;
-            background: rgba(255, 255, 255, 0.1);
+            color: var(--dark-text-primary) !important;
+            background: rgba(43, 49, 166, 0.15);
+            transform: translateX(4px);
         }
 
         .dark-mode .nav-link.active {
-            color: #ffffff !important;
-            background: rgba(99, 102, 241, 0.3);
+            color: var(--primary-color) !important;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* Gradientes modernos y efectos visuales */
+        .gradient-card {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gradient-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .glass-effect {
+            background: rgba(16, 18, 27, 0.8);
+            border: 1px solid var(--dark-border);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(43, 49, 166, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 30px rgba(43, 49, 166, 0.5);
+        }
+
+        .dark-mode .glow-effect {
+            box-shadow: 0 0 20px rgba(43, 49, 166, 0.4);
+        }
+
+        .dark-mode .glow-effect:hover {
+            box-shadow: 0 0 30px rgba(43, 49, 166, 0.6);
+        }
+
+        /* Mejoras de accesibilidad WCAG */
+        .btn:focus,
+        .nav-link:focus,
+        .card:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .badge {
+            font-weight: 600;
+            padding: 0.5em 0.75em;
+            border-radius: 0.375rem;
+        }
+
+        .badge-primary {
+            background: var(--primary-color) !important;
+            color: white !important;
+        }
+
+        .badge-warning {
+            background: var(--warning-color) !important;
+            color: var(--dark-text-primary) !important;
+        }
+
+        .badge-success {
+            background: var(--success-color) !important;
+            color: white !important;
+        }
+
+        .badge-info {
+            background: var(--accent-color) !important;
+            color: white !important;
+        }
+
+        /* Mejoras de contraste para texto */
+        .light-mode .text-muted {
+            color: #6b7280 !important;
+        }
+
+        .dark-mode .text-muted {
+            color: #9ca3af !important;
+        }
+
+        /* Mejoras específicas para la sección de introducción */
+        .light-mode .lead {
+            color: var(--light-text-primary) !important;
+            font-weight: 500;
+        }
+
+        .light-mode .card-body p {
+            color: var(--light-text-secondary) !important;
+        }
+
+        .light-mode .alert {
+            background: rgba(43, 49, 166, 0.08) !important;
+            border: 1px solid rgba(43, 49, 166, 0.2) !important;
+            color: var(--light-text-primary) !important;
+        }
+
+        .light-mode .alert strong {
+            color: var(--primary-color) !important;
+        }
+
+        .light-mode .alert-info {
+            background: rgba(6, 182, 212, 0.1) !important;
+            color: #164e63 !important;
+            border-color: rgba(6, 182, 212, 0.3) !important;
+        }
+
+        .light-mode .alert-info strong {
+            color: #0c4a6e !important;
+        }
+
+        /* Animaciones respetan preferencias de movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            .floating-animation,
+            .glow-effect,
+            .nav-link {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Estilos específicos para íconos en modo oscuro */
+        .dark-mode i {
+            color: inherit;
+        }
+
+        .dark-mode .fas,
+        .dark-mode .far,
+        .dark-mode .fab {
+            color: #e5e7eb;
+        }
+
+        .dark-mode .text-primary i,
+        .dark-mode i.text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .dark-mode .text-success i,
+        .dark-mode i.text-success {
+            color: var(--success-color) !important;
+        }
+
+        .dark-mode .text-warning i,
+        .dark-mode i.text-warning {
+            color: var(--warning-color) !important;
+        }
+
+        .dark-mode .text-info i,
+        .dark-mode i.text-info {
+            color: var(--accent-color) !important;
+        }
+
+        /* Asegurar que todos los textos sean visibles */
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3,
+        .dark-mode h4,
+        .dark-mode h5,
+        .dark-mode h6 {
+            color: #ffffff;
+        }
+
+        .dark-mode .card-body h3,
+        .dark-mode .card-body h4,
+        .dark-mode .card-body h5 {
+            color: #ffffff;
+        }
+
+        .dark-mode li {
+            color: #e5e7eb;
+        }
+
+        .dark-mode strong,
+        .dark-mode b {
+            color: #ffffff;
         }
 
         /* Estilos generales */
+        html {
+            overflow-x: hidden;
+        }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: -0.01em;
             transition: all 0.3s ease;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Tipografía moderna */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+        
+        h1 { font-size: 3rem; font-weight: 700; }
+        h2 { font-size: 2.5rem; font-weight: 600; }
+        h3 { font-size: 2rem; font-weight: 600; }
+        h4 { font-size: 1.5rem; font-weight: 500; }
+        h5 { font-size: 1.25rem; font-weight: 500; }
+        h6 { font-size: 1rem; font-weight: 500; }
+        
+        code, pre {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+            font-weight: 400;
         }
 
         .navbar {
@@ -126,33 +416,104 @@
             left: 0;
             right: 0;
             z-index: 1030;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+            padding: 0;
+            height: 80px;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .container-fluid {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navbar .d-flex {
+            display: flex;
+            align-items: center;
+            height: 100%;
         }
 
         .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.75rem;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
         }
 
         .theme-toggle {
-            background: none;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            padding: 8px 12px;
-            color: inherit;
-            transition: all 0.3s ease;
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             margin-left: 1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-outline-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .theme-toggle:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: scale(1.05);
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Botones modernos generales */
+        .btn-modern {
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            filter: brightness(1.1);
+            color: white;
+        }
+        
+        .btn-modern:active {
+            transform: translateY(-1px);
         }
 
         .sidebar {
@@ -162,10 +523,13 @@
             width: 280px;
             height: calc(100vh - 80px);
             overflow-y: auto;
-            padding: 2rem 0;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
+            padding: 2.5rem 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1020;
+            box-shadow: var(--shadow-lg);
         }
 
         .sidebar::-webkit-scrollbar {
@@ -183,32 +547,108 @@
 
         .main-content {
             margin-left: 280px;
-            margin-top: 80px;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
+            margin-top: 5px; /* Margen base reducido */
+            padding: 3rem 4rem;
+            min-height: calc(100vh - 85px);
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.02) 0%, rgba(26, 27, 58, 0.05) 100%);
+            position: relative;
+        }
+        
+        .main-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .nav-link {
-            border-radius: 8px;
-            margin: 0.25rem 1rem;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            margin: 0.5rem 1.5rem;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .nav-link:hover {
+            color: white;
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-link:hover::before {
+            opacity: 0.1;
+        }
+        
+        .nav-link.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .nav-link.active::before {
+            opacity: 0;
+        }
+        
+        .nav-link i {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-link span {
+            position: relative;
+            z-index: 1;
         }
 
         .section-content {
             display: none;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
         }
 
         .section-content.active {
             display: block;
-            animation: fadeInUp 0.5s ease;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         @keyframes fadeInUp {
-            from {
+            0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px) scale(0.95);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(10px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
             to {
                 opacity: 1;
@@ -217,30 +657,54 @@
         }
 
         .card {
-            border-radius: 16px;
-            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            background: var(--gradient-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-primary);
             color: white;
-            border-radius: 16px 16px 0 0 !important;
-            padding: 1.5rem;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 2rem;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .card-header h3 {
             margin: 0;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .card-body {
-            padding: 2rem;
+            padding: 2.5rem;
+            position: relative;
         }
 
         .lead {
@@ -293,70 +757,233 @@
         }
 
         .table {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             margin: 1.5rem 0;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .table th {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
-            padding: 1rem;
+            padding: 1.25rem 1rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            position: relative;
+        }
+        
+        .table th::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), transparent);
         }
 
         .table td {
-            padding: 1rem;
+            padding: 1.25rem 1rem;
             border-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .table tbody tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .table tbody tr:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .dark-mode .table {
+            color: #f3f4f6;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .table td {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #f3f4f6;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .dark-mode .table tbody tr:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            transform: scale(1.01);
+        }
+
+        .dark-mode .table tbody tr:hover td {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: #ffffff;
         }
 
         .badge {
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 500;
+            border-radius: 25px;
+            font-weight: 600;
             margin: 0.25rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .badge:hover::before {
+            left: 100%;
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-md);
         }
 
         .badge-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
         .badge-success {
-            background: var(--success-color);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: rgba(16, 185, 129, 0.3);
         }
 
         .badge-warning {
-            background: var(--warning-color);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border-color: rgba(245, 158, 11, 0.3);
         }
 
         .badge-info {
-            background: var(--accent-color);
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        /* Mejoras para badges en modo oscuro */
+        .dark-mode .badge {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .badge-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .dark-mode .badge-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .dark-mode .badge-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .dark-mode .badge-info {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
         }
 
         .alert {
-            border-radius: 12px;
-            border: none;
-            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
             margin: 1.5rem 0;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, currentColor, transparent);
+        }
+        
+        .alert:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .alert-info {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent-color);
-            border-left: 4px solid var(--accent-color);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05));
+            color: #67e8f9;
+            border-color: rgba(6, 182, 212, 0.3);
         }
 
         .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
-            border-left: 4px solid var(--success-color);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.3);
         }
 
         .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning-color);
-            border-left: 4px solid var(--warning-color);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .alert-primary {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.1));
+            color: #a5b4fc;
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        /* Mejoras específicas para modo oscuro */
+        .dark-mode .alert-info {
+            background: rgba(6, 182, 212, 0.2);
+            color: #67e8f9;
+        }
+
+        .dark-mode .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+
+        .dark-mode .alert-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+        }
+
+        .dark-mode .alert-primary {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
         }
 
         .feature-grid {
@@ -367,16 +994,89 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+            background: var(--gradient-card);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #e5e7eb;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
             border-color: var(--primary-color);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Estilos específicos para feature-card en modo claro */
+        .light-mode .feature-card {
+            background: var(--light-card);
+            border: 1px solid var(--light-border);
+            color: var(--light-text-primary);
+            box-shadow: 0 4px 12px rgba(43, 49, 166, 0.08);
+        }
+
+        .light-mode .feature-card:hover {
+            background: rgba(248, 249, 250, 0.9);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(43, 49, 166, 0.15);
+        }
+
+        .light-mode .feature-card h3,
+        .light-mode .feature-card h4,
+        .light-mode .feature-card h5 {
+            color: var(--light-text-primary);
+            font-weight: 600;
+        }
+
+        .light-mode .feature-card p,
+        .light-mode .feature-card li {
+            color: var(--light-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Mejoras para tarjetas en modo oscuro */
+        .dark-mode .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f3f4f6;
+        }
+
+        .dark-mode .feature-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .dark-mode .feature-card h3,
+        .dark-mode .feature-card h4,
+        .dark-mode .feature-card h5 {
+            color: #ffffff;
+        }
+
+        .dark-mode .feature-card p,
+        .dark-mode .feature-card li {
+            color: #e5e7eb;
         }
 
         .feature-icon {
@@ -385,15 +1085,59 @@
             margin-bottom: 1rem;
         }
 
+        /* Sistema de márgenes responsivos para diferentes tamaños de pantalla */
+        
+        /* Pantallas Ultra Grandes (34"+ / 3440x1440+) */
+        @media (min-width: 3440px) {
+            .main-content {
+                margin-top: 5px;
+                min-height: calc(100vh - 90px);
+            }
+        }
+        
+        /* Pantallas Grandes (27-32" / 2560x1440 - 4K) */
+        @media (min-width: 2560px) and (max-width: 3439px) {
+            .main-content {
+                margin-top: 5px;
+                min-height: calc(100vh - 88px);
+            }
+        }
+        
+        /* Pantallas Medianas-Grandes (24-27" / 1920x1080 - 2560x1440) */
+        @media (min-width: 1920px) and (max-width: 2559px) {
+            .main-content {
+                margin-top: 5px;
+                min-height: calc(100vh - 86px);
+            }
+        }
+        
+        /* Pantallas Estándar (22-24" / 1680x1050 - 1920x1080) */
+        @media (min-width: 1680px) and (max-width: 1919px) {
+            .main-content {
+                margin-top: 5px;
+                min-height: calc(100vh - 84px);
+            }
+        }
+        
+        /* Pantallas Pequeñas-Medianas (17-22" / 1366x768 - 1680x1050) */
+        @media (min-width: 1401px) and (max-width: 1679px) {
+            .main-content {
+                margin-top: 5px;
+                min-height: calc(100vh - 82px);
+            }
+        }
+
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1400px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                z-index: 1050;
             }
 
             .sidebar.show {
                 transform: translateX(0);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
             }
 
             .main-content {
@@ -402,42 +1146,367 @@
             }
 
             .navbar-toggler {
-                display: block !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                left: 15px;
+                top: 0;
+                bottom: 0;
+                margin: auto 0;
+                height: 40px;
+                width: 40px;
+                z-index: 1051;
+                border: none;
+                background: transparent;
+                padding: 0;
+            }
+
+            .navbar {
+                position: relative;
+            }
+
+            .navbar-brand {
+                margin-left: 50px;
+            }
+        }
+
+        @media (min-width: 1401px) {
+            .navbar-toggler {
+                display: none !important;
+            }
+        }
+
+        /* Media queries mejorados para mejor responsividad */
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                left: 8px;
+                width: 40px;
+                height: 40px;
+                top: 0;
+                bottom: 0;
+                margin: auto 0;
+            }
+
+            .hamburger-icon {
+                width: 22px;
+                height: 16px;
+            }
+
+            .hamburger-line {
+                height: 2px;
+            }
+
+            .navbar {
+                position: relative;
+                padding-right: 1rem;
+            }
+
+            .navbar-brand {
+                margin-left: 50px;
+            }
+
+            .sidebar {
+                width: 300px;
+                padding: 1rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                margin-top: 5px; /* Tablets (768px-1400px) */
+                padding: 2rem 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .search-box {
+                margin: 1rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-toggler {
+                width: 36px;
+                height: 36px;
+                top: 0.75rem;
+                left: 0.75rem;
+            }
+
+            .hamburger-icon {
+                width: 20px;
+                height: 15px;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 0.75rem;
+            }
+
+            .navbar {
+                padding-left: 55px;
+                padding-right: 0.75rem;
+            }
+            
+            .main-content {
+                margin-top: 5px; /* Móviles (480px) - margen mínimo */
+                padding: 1.5rem 1rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+            
+            .card-header {
+                padding: 1rem;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1400px) {
+            .navbar-toggler {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hamburger-icon {
+                width: 22px;
+                height: 16px;
+            }
+        }
+
+        /* Mejoras para dispositivos táctiles */
+        @media (hover: none) and (pointer: coarse) {
+            .navbar-toggler {
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .navbar-toggler:hover::before {
+                width: 50px;
+                height: 50px;
             }
         }
 
         .navbar-toggler {
             display: block;
-            border: none;
-            padding: 0.5rem;
-            color: inherit;
+            border: 2px solid var(--primary-color);
+            padding: 0.75rem;
+            color: var(--primary-color);
+            background: rgba(43, 49, 166, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .navbar-toggler:hover {
+            background: rgba(43, 49, 166, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(43, 49, 166, 0.3);
+        }
+
+        /* Icono hamburguesa moderno SVG */
+        .modern-hamburger .hamburger-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .modern-hamburger:hover .hamburger-icon {
+            color: var(--accent-color);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(43, 49, 166, 0.4));
+        }
+
+        .modern-hamburger:active .hamburger-icon {
+            transform: scale(0.95);
+        }
+
+        /* Animación de rotación para el estado activo */
+        .modern-hamburger[aria-expanded="true"] .hamburger-icon {
+            transform: rotate(90deg);
+            color: var(--accent-color);
+        }
+
+        .modern-hamburger[aria-expanded="true"]:hover .hamburger-icon {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Animación de entrada suave */
+        @keyframes hamburgerFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modern-hamburger .hamburger-icon {
+            animation: hamburgerFadeIn 0.3s ease-out;
+        }
+
+        /* Efecto de pulso al hacer clic */
+        .navbar-toggler:active {
+            transform: scale(0.95);
+        }
+
+        /* Animación de entrada suave para el botón */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .navbar-toggler {
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        /* Mejora del feedback visual */
+        .navbar-toggler::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(43, 49, 166, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .navbar-toggler:hover::before {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Estilos de accesibilidad */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Mejoras de foco para accesibilidad */
+        .navbar-toggler:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(43, 49, 166, 0.3);
+        }
+
+        /* Soporte para navegación por teclado */
+        .navbar-toggler:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Indicador de estado para lectores de pantalla */
+        .navbar-toggler[aria-expanded="true"] .hamburger-icon::after {
+            content: "Menu abierto";
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .navbar-toggler[aria-expanded="false"] .hamburger-icon::after {
+            content: "Menu cerrado";
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
 
         .search-box {
             position: relative;
-            margin: 1rem;
+            margin: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .search-box input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: inherit;
-            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.1);
+            color: white;
+            backdrop-filter: blur(20px);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(99, 102, 241, 0.15);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
         }
 
         .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
         }
 
         .search-box i {
             position: absolute;
-            left: 1rem;
+            left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within i {
+            color: white;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .back-to-top {
@@ -448,24 +1517,267 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
+            width: 56px;
+            height: 56px;
+            font-size: 1.3rem;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
+            transform: translateY(30px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .back-to-top:hover::before {
+            opacity: 0.8;
+        }
+        
+        .back-to-top:hover {
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .back-to-top:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .back-to-top.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .back-to-top:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Estilos para el Modal de Motores Gráficos */
+        .engine-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .engine-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .engine-card.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color)10, transparent);
+        }
+
+        .dark-mode .engine-card {
+            background-color: var(--dark-card);
+            border-color: var(--dark-surface);
+        }
+
+        .dark-mode .engine-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .dark-mode .engine-card.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent);
+        }
+
+        .text-purple {
+            color: #8b5cf6 !important;
+        }
+
+        .bg-purple {
+            background-color: #8b5cf6 !important;
+        }
+
+        .dark-mode .modal-content {
+            background-color: var(--dark-surface);
+            color: var(--text-color);
+        }
+
+        .dark-mode .modal-header {
+            border-bottom-color: var(--dark-card);
+        }
+
+        .dark-mode .modal-footer {
+            border-top-color: var(--dark-card);
+        }
+
+        .dark-mode .btn-close {
+            filter: invert(1);
+        }
+
+        #engineContent {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .command-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .command-item {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 0.375rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .dark-mode .command-item {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .pros {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+        }
+
+        .dark-mode .pros {
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .dark-mode .cons {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Animaciones escalonadas */
+        .feature-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Animación de pulso para elementos importantes */
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: var(--shadow-sm);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: var(--shadow-glow);
+            }
+        }
+
+        /* Animación de flotación */
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animación de brillo */
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .glow-effect:hover::before {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        /* Micro-interacciones para botones */
+        .btn-modern:active {
+            transform: scale(0.95);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.9);
+        }
+
+        /* Animación de entrada para alerts */
+        .alert {
+            animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -473,16 +1785,31 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
+            <button class="navbar-toggler modern-hamburger" 
+                    type="button" 
+                    onclick="toggleSidebar()" 
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="sidebar"
+                    role="button"
+                    tabindex="0">
+                <svg width="24" height="24" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50.008,56.043l-35.989,0c-3.309,0 -5.995,-2.686 -5.995,-5.995l0,-36.011c0,-3.308 2.686,-5.994 5.995,-5.995l35.989,0c3.309,0.001 5.995,2.687 5.995,5.995l0,36.011c0,3.309 -2.686,5.995 -5.995,5.995Zm-25.984,-4.001l0,-39.999l-9.012,0c-1.65,0 -2.989,1.339 -2.989,2.989l0,34.021c0,1.65 1.339,2.989 2.989,2.989l9.012,0Zm24.991,-39.999l-20.991,0l0,39.999l20.991,0c1.65,0 2.989,-1.339 2.989,-2.989l0,-34.021c0,-1.65 -1.339,-2.989 -2.989,-2.989Z"/>
+                    <rect x="14.611" y="16.042" width="6.569" height="2"/>
+                    <rect x="14.611" y="24.042" width="6.569" height="2"/>
+                    <rect x="14.611" y="20.042" width="6.569" height="2"/>
+                </svg>
+                <span class="sr-only">Toggle navigation menu</span>
             </button>
             
             <a class="navbar-brand" href="../../public/index.html">
-                <i class="fas fa-gamepad me-2"></i>NexusEngine
+                <i class="fas fa-gamepad me-2"></i>Nexus
             </a>
             
             <div class="d-flex align-items-center">
-                <span class="me-2">Guía Completa</span>
+                <button class="btn btn-outline-primary me-2" onclick="openEngineModal()" title="Seleccionar Motor Gráfico">
+                    <i class="fas fa-cogs me-1"></i>Guía Completa
+                </button>
                 <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
                     <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
@@ -540,10 +1867,10 @@
         <div id="intro" class="section-content active">
             <div class="card">
                 <div class="card-header">
-                    <h3><i class="fas fa-rocket me-2"></i>Bienvenido a NexusEngine</h3>
-                </div>
-                <div class="card-body">
-                    <p class="lead">NexusEngine es una plataforma revolucionaria que combina múltiples motores gráficos con inteligencia artificial para crear una experiencia de desarrollo de juegos única y accesible.</p>
+                    <h3><i class="fas fa-rocket me-2"></i>Bienvenido a Nexus</h3>
+                <hr class="my-4">
+                
+                <p class="lead">Nexus es una plataforma revolucionaria que combina múltiples motores gráficos con inteligencia artificial para crear una experiencia de desarrollo de juegos única y accesible.</p>
                     
                     <div class="feature-grid">
                         <div class="feature-card">
@@ -581,7 +1908,7 @@
                     
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle me-2"></i>
-                        <strong>¿Nuevo en NexusEngine?</strong> Te recomendamos empezar con la sección de "Métodos de Interacción" para entender las diferentes formas de usar la plataforma.
+                        <strong>¿Nuevo en Nexus?</strong> Te recomendamos empezar con la sección de "Métodos de Interacción" para entender las diferentes formas de usar la plataforma.
                     </div>
                 </div>
             </div>
@@ -596,7 +1923,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <div class="card h-100">
+                            <div class="card h-100 glow-effect floating-animation">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <i class="fas fa-gamepad text-primary me-2"></i>Kaplay Engine
@@ -614,7 +1941,7 @@
                         </div>
                         
                         <div class="col-md-6 mb-4">
-                            <div class="card h-100">
+                            <div class="card h-100 glass-effect">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <i class="fas fa-wrench text-warning me-2"></i>Motor Personalizado
@@ -1424,6 +2751,118 @@ si vida_jugador <= 0:
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Modal de Selección de Motores Gráficos -->
+    <div class="modal fade" id="engineModal" tabindex="-1" aria-labelledby="engineModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="engineModalLabel">
+                        <i class="fas fa-cogs me-2"></i>Seleccionar Motor Gráfico
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <!-- Kaplay Engine - Primera opción (más sencilla) -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card" onclick="redirectToGuide('kaplay')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-gamepad fa-3x text-danger mb-3"></i>
+                                    <h5 class="card-title">Kaplay Engine</h5>
+                                    <p class="card-text">Motor 2D JavaScript para web</p>
+                                    <div class="badge bg-danger">JavaScript</div>
+                                    <div class="badge bg-success">Fácil</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Three.js -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card" onclick="redirectToGuide('threejs')">
+                                <div class="card-body text-center">
+                                    <i class="fab fa-js-square fa-3x text-warning mb-3"></i>
+                                    <h5 class="card-title">Three.js</h5>
+                                    <p class="card-text">Motor 3D para web con WebGL</p>
+                                    <div class="badge bg-warning">JavaScript</div>
+                                    <div class="badge bg-info">3D</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Babylon.js -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card" onclick="redirectToGuide('babylonjs')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-cube fa-3x text-info mb-3"></i>
+                                    <h5 class="card-title">Babylon.js</h5>
+                                    <p class="card-text">Motor 3D avanzado para web</p>
+                                    <div class="badge bg-warning">JavaScript</div>
+                                    <div class="badge bg-success">Avanzado</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phaser -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card" onclick="redirectToGuide('phaser')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
+                                    <h5 class="card-title">Phaser</h5>
+                                    <p class="card-text">Motor 2D robusto para juegos web</p>
+                                    <div class="badge bg-warning">JavaScript</div>
+                                    <div class="badge bg-info">Próximamente</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PixiJS -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card" onclick="redirectToGuide('pixijs')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-paint-brush fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title">PixiJS</h5>
+                                    <p class="card-text">Renderer 2D ultra rápido</p>
+                                    <div class="badge bg-warning">JavaScript</div>
+                                    <div class="badge bg-info">Próximamente</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Motor Personalizado -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 engine-card gradient-card glow-effect" onclick="redirectToGuide('nexus')">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-magic fa-3x mb-3" style="color: white;"></i>
+                                    <h5 class="card-title">NexusEngine</h5>
+                                    <p class="card-text">Motor gráfico personalizado con IA integrada</p>
+                                    <div class="badge" style="background: rgba(255,255,255,0.2); color: white;">Personalizado</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenido dinámico del motor seleccionado -->
+                    <div id="engineContent" class="mt-4" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0" id="engineContentTitle"></h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="engineContentBody"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="useEngineBtn" style="display: none;" onclick="useSelectedEngine()">
+                        Usar Este Motor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Prism.js -->
@@ -1516,7 +2955,35 @@ si vida_jugador <= 0:
         // Sidebar toggle for mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.querySelector('.navbar-toggler');
+            
+            const isOpen = sidebar.classList.contains('show');
+            
+            // Toggle sidebar visibility
             sidebar.classList.toggle('show');
+            toggleBtn.classList.toggle('active');
+            
+            // Update ARIA attributes for accessibility
+            toggleBtn.setAttribute('aria-expanded', !isOpen);
+            
+            // Update aria-label based on state
+            if (!isOpen) {
+                toggleBtn.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                toggleBtn.setAttribute('aria-label', 'Open navigation menu');
+            }
+            
+            // Focus management for keyboard users
+            if (!isOpen) {
+                // When opening, focus on first focusable element in sidebar
+                const firstFocusable = sidebar.querySelector('a, button, input, [tabindex]:not([tabindex="-1"])');
+                if (firstFocusable) {
+                    setTimeout(() => firstFocusable.focus(), 100);
+                }
+            } else {
+                // When closing, return focus to toggle button
+                toggleBtn.focus();
+            }
         }
 
         // Back to top functionality
@@ -1557,6 +3024,424 @@ si vida_jugador <= 0:
             if (window.innerWidth > 768) {
                 sidebar.classList.remove('show');
             }
+        });
+
+        // Funciones del Modal de Motores Gráficos
+        let selectedEngine = null;
+
+        function openEngineModal() {
+            const modal = new bootstrap.Modal(document.getElementById('engineModal'));
+            modal.show();
+        }
+
+        function redirectToGuide(engineType) {
+            // URLs de las guías específicas para cada motor
+            const guideUrls = {
+                'kaplay': '../guides/kaplay-guide.html',
+                'threejs': '../guides/threejs-guide.html',
+                'babylonjs': '../guides/babylonjs-guide.html',
+                'phaser': '../guides/phaser-guide.html',
+                'pixijs': '../guides/pixijs-guide.html',
+                'nexus': '../../nexus-engine/docs/guides/nexus-guide.html'
+            };
+
+            // Redirigir a la página de la guía específica
+            if (guideUrls[engineType]) {
+                window.location.href = guideUrls[engineType];
+            } else {
+                // Fallback: mostrar alerta si la guía no está disponible
+                alert('Guía no disponible aún. Próximamente estará lista.');
+            }
+        }
+
+        function showEngineContent(engineType) {
+            const contentDiv = document.getElementById('engineContent');
+            const titleDiv = document.getElementById('engineContentTitle');
+            const bodyDiv = document.getElementById('engineContentBody');
+
+            const engineData = getEngineData(engineType);
+            
+            titleDiv.innerHTML = `<i class="${engineData.icon} me-2"></i>${engineData.name}`;
+            bodyDiv.innerHTML = engineData.content;
+            
+            contentDiv.style.display = 'block';
+        }
+
+        function getEngineData(engineType) {
+            const engines = {
+                threejs: {
+                    name: 'Three.js',
+                    icon: 'fas fa-cube',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-code me-2"></i>Comandos Principales</h6>
+                            <div class="command-item">
+                                <strong>const geometry = new THREE.BoxGeometry(1, 1, 1)</strong><br>
+                                <small>Crear geometrías 3D (Box, Sphere, Plane, etc.)</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>mesh.position.set(x, y, z)</strong><br>
+                                <small>Posicionar objetos en el espacio 3D</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>scene.add(mesh)</strong><br>
+                                <small>Agregar objetos a la escena</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>renderer.render(scene, camera)</strong><br>
+                                <small>Renderizar la escena con la cámara</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>loader.load('model.gltf', (gltf) => {...})</strong><br>
+                                <small>Cargar modelos 3D externos</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Biblioteca 3D web más popular</li>
+                                    <li>Amplia comunidad y recursos</li>
+                                    <li>Excelente rendimiento WebGL</li>
+                                    <li>Documentación completa</li>
+                                    <li>Soporte para VR/AR</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Curva de aprendizaje moderada</li>
+                                    <li>Requiere conocimiento de 3D</li>
+                                    <li>Configuración inicial compleja</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                babylonjs: {
+                    name: 'Babylon.js',
+                    icon: 'fas fa-globe',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-code me-2"></i>Comandos Principales</h6>
+                            <div class="command-item">
+                                <strong>BABYLON.MeshBuilder.CreateBox("box", {size:1}, scene)</strong><br>
+                                <small>Crear primitivas 3D con el MeshBuilder</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>mesh.position = new BABYLON.Vector3(x, y, z)</strong><br>
+                                <small>Posicionar objetos en el espacio</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>BABYLON.SceneLoader.ImportMesh("", "path/", "model.babylon", scene)</strong><br>
+                                <small>Importar modelos 3D</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>engine.runRenderLoop(() => scene.render())</strong><br>
+                                <small>Iniciar el bucle de renderizado</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>scene.registerBeforeRender(() => {...})</strong><br>
+                                <small>Registrar callbacks de actualización</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Motor 3D completo para web</li>
+                                    <li>Editor visual integrado</li>
+                                    <li>Física avanzada integrada</li>
+                                    <li>Soporte nativo para VR/AR</li>
+                                    <li>Herramientas de desarrollo robustas</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Más pesado que Three.js</li>
+                                    <li>Comunidad más pequeña</li>
+                                    <li>Curva de aprendizaje empinada</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                phaser: {
+                    name: 'Phaser',
+                    icon: 'fas fa-gamepad',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-code me-2"></i>Comandos Principales</h6>
+                            <div class="command-item">
+                                <strong>this.add.sprite(x, y, 'key')</strong><br>
+                                <small>Crear sprites en la escena</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>this.physics.add.sprite(x, y, 'key')</strong><br>
+                                <small>Crear sprites con física</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>this.load.image('key', 'path/image.png')</strong><br>
+                                <small>Cargar recursos gráficos</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>this.input.keyboard.createCursorKeys()</strong><br>
+                                <small>Configurar controles de teclado</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>this.scene.start('SceneName')</strong><br>
+                                <small>Cambiar entre escenas</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Framework 2D muy maduro</li>
+                                    <li>Física integrada (Arcade, Matter.js)</li>
+                                    <li>Amplia comunidad</li>
+                                    <li>Documentación excelente</li>
+                                    <li>Soporte para móviles</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Principalmente para juegos 2D</li>
+                                    <li>Puede ser complejo para principiantes</li>
+                                    <li>Tamaño de archivo considerable</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                pixijs: {
+                    name: 'PixiJS',
+                    icon: 'fas fa-paint-brush',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-code me-2"></i>Comandos Principales</h6>
+                            <div class="command-item">
+                                <strong>const sprite = PIXI.Sprite.from('image.png')</strong><br>
+                                <small>Crear sprites desde imágenes</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>app.stage.addChild(sprite)</strong><br>
+                                <small>Agregar objetos al escenario</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>sprite.x = 100; sprite.y = 50</strong><br>
+                                <small>Posicionar objetos 2D</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>PIXI.Loader.shared.add('key', 'path').load(setup)</strong><br>
+                                <small>Cargar recursos con el loader</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>app.ticker.add(gameLoop)</strong><br>
+                                <small>Configurar el bucle de juego</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Renderizado 2D ultra-rápido</li>
+                                    <li>Muy ligero y eficiente</li>
+                                    <li>API simple y clara</li>
+                                    <li>Excelente para animaciones</li>
+                                    <li>Soporte WebGL automático</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Solo para gráficos 2D</li>
+                                    <li>Sin física integrada</li>
+                                    <li>Menos funciones de juego</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                kaplay: {
+                    name: 'Kaplay Engine',
+                    icon: 'fas fa-gamepad',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-code me-2"></i>Comandos Principales</h6>
+                            <div class="command-item">
+                                <strong>add([sprite("player"), pos(100, 100)])</strong><br>
+                                <small>Crear objetos con componentes</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>scene("game", () => { ... })</strong><br>
+                                <small>Definir escenas del juego</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>onKeyPress("space", () => { ... })</strong><br>
+                                <small>Manejar entrada del usuario</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>loadSprite("player", "sprites/player.png")</strong><br>
+                                <small>Cargar recursos gráficos</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>go("game")</strong><br>
+                                <small>Cambiar entre escenas</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Muy fácil de aprender</li>
+                                    <li>Perfecto para juegos 2D web</li>
+                                    <li>Sintaxis simple y clara</li>
+                                    <li>Desarrollo rápido</li>
+                                    <li>Gratuito y open source</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Solo para juegos 2D</li>
+                                    <li>Limitado a web</li>
+                                    <li>Funcionalidades básicas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                custom: {
+                    name: 'NexusEngine - Motor Gráfico Personalizado',
+                    icon: 'fas fa-magic',
+                    content: `
+                        <div class="command-list">
+                            <h6><i class="fas fa-magic me-2"></i>Comandos Unificados Humanizados</h6>
+                            <div class="command-item">
+                                <strong>"crear cubo en 100,50,0"</strong><br>
+                                <small>→ Crea un cubo en las coordenadas especificadas</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>"mover jugador a 200,100"</strong><br>
+                                <small>→ Mueve el objeto jugador a la posición indicada</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>"agregar física a cubo"</strong><br>
+                                <small>→ Añade componente de física al objeto cubo</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>"cargar escena menu"</strong><br>
+                                <small>→ Cambia a la escena del menú</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>"cuando presione espacio saltar"</strong><br>
+                                <small>→ Define evento de entrada para salto</small>
+                            </div>
+                            <div class="command-item">
+                                <strong>"aplicar material metal a esfera"</strong><br>
+                                <small>→ Asigna material metálico al objeto esfera</small>
+                            </div>
+                        </div>
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <h6><i class="fas fa-thumbs-up me-2"></i>Ventajas</h6>
+                                <ul>
+                                    <li>Comandos en lenguaje natural</li>
+                                    <li>Combina lo mejor de todos los motores</li>
+                                    <li>Intérprete IA integrado</li>
+                                    <li>Sintaxis humanizada</li>
+                                    <li>Desarrollo ultra-rápido</li>
+                                    <li>Soporte 2D y 3D</li>
+                                </ul>
+                            </div>
+                            <div class="cons">
+                                <h6><i class="fas fa-thumbs-down me-2"></i>Desventajas</h6>
+                                <ul>
+                                    <li>Motor en desarrollo</li>
+                                    <li>Requiere entrenamiento del intérprete</li>
+                                    <li>Dependiente de IA</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <h6><i class="fas fa-brain me-2"></i>Intérprete Humanizado</h6>
+                            <p>El motor personalizado utiliza un intérprete de IA que traduce comandos en lenguaje natural a código específico del motor subyacente, optimizando automáticamente el rendimiento según las necesidades del proyecto.</p>
+                        </div>
+                    `
+                }
+            };
+
+            return engines[engineType] || engines.custom;
+        }
+
+        function useSelectedEngine() {
+            if (selectedEngine) {
+                // Aquí puedes agregar lógica para usar el motor seleccionado
+                alert(`Has seleccionado: ${getEngineData(selectedEngine).name}\n\n¡Perfecto! Ahora puedes usar los comandos de este motor en tu proyecto.`);
+                
+                // Cerrar el modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('engineModal'));
+                modal.hide();
+                
+                // Resetear selección
+                selectedEngine = null;
+                document.getElementById('engineContent').style.display = 'none';
+                document.getElementById('useEngineBtn').style.display = 'none';
+                document.querySelectorAll('.engine-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+            }
+        }
+
+        // Event listeners para accesibilidad
+        document.addEventListener('DOMContentLoaded', () => {
+            // Soporte para tecla Escape para cerrar el menú
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const sidebar = document.getElementById('sidebar');
+                    const toggleBtn = document.querySelector('.navbar-toggler');
+                    
+                    if (sidebar.classList.contains('show')) {
+                        toggleSidebar();
+                    }
+                }
+            });
+
+            // Soporte para Enter y Space en el botón hamburguesa
+            const toggleBtn = document.querySelector('.navbar-toggler');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleSidebar();
+                    }
+                });
+            }
+
+            // Trap focus dentro del sidebar cuando está abierto
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const sidebar = document.getElementById('sidebar');
+                    if (sidebar.classList.contains('show')) {
+                        const focusableElements = sidebar.querySelectorAll(
+                            'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                        );
+                        const firstElement = focusableElements[0];
+                        const lastElement = focusableElements[focusableElements.length - 1];
+
+                        if (e.shiftKey && document.activeElement === firstElement) {
+                            e.preventDefault();
+                            lastElement.focus();
+                        } else if (!e.shiftKey && document.activeElement === lastElement) {
+                            e.preventDefault();
+                            firstElement.focus();
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>

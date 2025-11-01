@@ -14,10 +14,10 @@ export default class AIChat {
         
         this.providers = {
             local: { name: 'Local AI', icon: '🏠', available: true },
-            deepseek: { name: 'DeepSeek', icon: '🔍', available: navigator.onLine },
-            ollama: { name: 'Ollama', icon: '🦙', available: navigator.onLine },
-            chatgpt: { name: 'ChatGPT', icon: '🤖', available: navigator.onLine },
-            claude: { name: 'Claude Sonnet', icon: '🎭', available: navigator.onLine }
+            deepseek: { name: 'DeepSeek', icon: '🔍', available: (typeof navigator !== 'undefined' && navigator.onLine) || true },
+            ollama: { name: 'Ollama', icon: '🦙', available: (typeof navigator !== 'undefined' && navigator.onLine) || true },
+            chatgpt: { name: 'ChatGPT', icon: '🤖', available: (typeof navigator !== 'undefined' && navigator.onLine) || true },
+            claude: { name: 'Claude Sonnet', icon: '🎭', available: (typeof navigator !== 'undefined' && navigator.onLine) || true }
         };
 
         this.init();
@@ -967,7 +967,7 @@ Instrucciones:
     }
 
     updateNetworkStatus() {
-        const isOnline = navigator.onLine;
+        const isOnline = (typeof navigator !== 'undefined' && navigator.onLine) || true;
         
         // Update provider availability
         Object.keys(this.providers).forEach(key => {
